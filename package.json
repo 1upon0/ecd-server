@@ -30,8 +30,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anonymous node/sails user/ocd.git"
+    "url": "https://github.com/1upon0/ecd-server"
   },
-  "author": "anonymous node/sails user",
+  "author": "1upon0",
   "license": ""
 }
