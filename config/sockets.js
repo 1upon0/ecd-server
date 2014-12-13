@@ -22,9 +22,10 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
   onConnect: function(session, socket) {
-
     // By default, do nothing.
-
+    socket.on('selfdeploy-request',function(data,ack){
+      ack(sails.controllers.selfdeploy.requestStatus(socket,data));
+    });
   },
 
 

@@ -1,0 +1,29 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(function(){
+    var sock=io.connect('/');
+    sock.on("connect",function(){
+       $('#status').html("connected. Waiting for authorization");
+    });
+    $('#authform').on('submit',function(){
+        sock.emit('selfdeploy-request',$('#passcode').val(),function(resp){
+            $('#status').html(resp);
+            if(resp=='success')
+                $('#authform').hide();
+        });
+        return false;
+    });
+    sock.on("disconnect",function(){
+        $('#status').html("disconnected");
+    });
+    sock.on("selfdeploy-update",function(data){
+            $('#status').html("live");
+            $('#log').html($('#log').html()+data);
+    });
+});
+</script>
+<form id="authform">
+<label>Passcode</label> <input type="password" id="passcode"> <button type="submit">Login</button>
+</form>
+<div id="status">Loading...</div>
+<pre id="log"></pre>
